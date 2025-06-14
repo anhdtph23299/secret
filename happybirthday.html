@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Chúc Mừng Sinh Nhật 🎉</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 25%, #fecfef 75%, #ff9a9e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            opacity: 0.8;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+        }
+
+        .particle.star {
+            background: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .particle.heart {
+            background: #ff6b6b;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) rotate(360deg) scale(0.5);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 2rem 0;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            animation: bounce 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-avatar:has(img) {
+            background: none;
+        }
+
+        .profile-avatar::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .birthday-message {
+            font-size: 1.1rem;
+            color: #444;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .photo-gallery {
+            margin: 3rem 0;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .photo-item:hover .photo-placeholder {
+            transform: scale(1.1);
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 15px;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .photo-placeholder:has(img) {
+            background: none;
+            animation: none;
+        }
+
+        /* Music Player Container */
+        .music-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-player {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50px;
+            padding: 15px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.5s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+        }
+
+        .music-player.hidden {
+            opacity: 0;
+            transform: translateX(100%);
+            pointer-events: none;
+        }
+
+        .music-player:not(.hidden):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .play-btn.playing {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        .music-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .song-artist {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 15px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Toggle Button for Music Player - FIX POSITION */
+        .music-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .music-toggle.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Hide/Show Button - FIX POSITION */
+        .hide-show-btn {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            border: 2px solid white;
+            color: white;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .hide-show-btn:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+        }
+
+        .wishes-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .wishes-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .wish-item {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            color: white;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .wish-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            animation: floatHeart 4s infinite linear;
+            opacity: 0.8;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(18deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(162deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) rotate(180deg) scale(0.5);
+            }
+        }
+
+        /* Credit creator */
+        .creator-credit {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+            z-index: 999;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .creator-credit:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 2rem;
+            }
+            
+            .profile-header {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            .music-container {
+                bottom: 80px;
+                right: 10px;
+            }
+
+            .music-player {
+                padding: 10px 15px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .creator-credit {
+                bottom: 10px;
+                left: 10px;
+                font-size: 0.7rem;
+                padding: 6px 10px;
+            }
+
+            .volume-control {
+                margin-left: 0;
+            }
+            
+            .wishes-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .hide-show-btn {
+                width: 20px;
+                height: 20px;
+                font-size: 0.6rem;
+                top: -3px;
+                right: -3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-name {
+                font-size: 1.8rem;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="hearts"></div>
+
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="image/12.jpg" alt="">
+            </div>
+            <h2>🎉 16/06! 🎉</h2>
+            <p class="profile-subtitle">🌟 Một ngày đặc biệt dành cho <b>Đinh Thu Huyền</b> 🌟</p>
+            <p class="birthday-message">
+                "Chúc cậu có một ngày sinh nhật thật vui vẻ và ý nghĩa! Mong rằng tuổi mới sẽ mang đến cho cậu 
+                nhiều niềm vui, hạnh phúc và những điều tốt đẹp nhất. Hãy luôn giữ nụ cười tươi và tinh thần lạc quan nhé! 🎉✨"
+            </p>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="photo-gallery">
+            <h2 class="gallery-title">📸 Những Khoảnh Khắc Đẹp</h2>
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/14.jpg" alt="Ảnh 14">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/13.jpg" alt="Ảnh 13">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/12.jpg" alt="Ảnh 12">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/11.jpg" alt="Ảnh 11">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/10.jpg" alt="Ảnh 10">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/9.jpg" alt="Ảnh 9">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/8.jpg" alt="Ảnh 8">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/7.jpg" alt="Ảnh 7">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/6.jpg" alt="Ảnh 6">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/5.jpg" alt="Ảnh 5">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/4.jpg" alt="Ảnh 4">
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <img src="image/3.jpg" alt="Ảnh 3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Birthday Wishes -->
+        <div class="wishes-section">
+            <div class="wishes-container">
+                <h2 class="gallery-title">💝 Lời Chúc Sinh Nhật</h2>
+                <div class="wish-item">
+                    🎈 Chúc cậu luôn khỏe mạnh và hạnh phúc trong cuộc sống!
+                </div>
+                <div class="wish-item">
+                    🌟 Mong rằng mọi ước mơ của cậu đều trở thành hiện thực!
+                </div>
+                <div class="wish-item">
+                    🎊 Tuổi mới tràn đầy năng lượng và những trải nghiệm tuyệt vời!
+                </div>
+                <div class="wish-item">
+                    💖 Được bao quanh bởi tình yêu thương từ gia đình và bạn bè!
+                </div>
+                <div class="wish-item">
+                    🌈 Cuộc sống luôn tươi đẹp như cầu vồng sau cơn mưa!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Container -->
+    <div class="music-container">
+        <!-- Music Player -->
+        <div class="music-player" id="musicPlayer">
+            <button class="hide-show-btn" id="hideBtn" title="Ẩn music player">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="play-btn" id="playBtn">
+                <i class="fas fa-play" id="playIcon"></i>
+            </button>
+            <div class="music-info">
+                <div class="song-title" id="songTitle">Happy Birthday</div>
+                <div class="song-artist">🎵 Chúc mừng sinh nhật</div>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up" style="color: #666; font-size: 0.9rem;"></i>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+            </div>
+        </div>
+
+        <!-- Music Toggle Button -->
+        <button class="music-toggle" id="musicToggle" title="Hiện music player">
+            <i class="fas fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Creator Credit -->
+    <div class="creator-credit">
+        💻 Created by Kit
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="birthdayAudio" loop preload="metadata">
+        <source src="happybirthday.mp3" type="audio/mp3">
+        <source src="happybirthday.ogg" type="audio/ogg">
+        <source src="happybirthday.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let isPlaying = false;
+        let musicPlayerVisible = true;
+        const audio = document.getElementById('birthdayAudio');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const songTitle = document.getElementById('songTitle');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const musicToggle = document.getElementById('musicToggle');
+        const hideBtn = document.getElementById('hideBtn');
+
+        // Hide Music Player
+        hideBtn.addEventListener('click', function() {
+            musicPlayer.classList.add('hidden');
+            musicToggle.classList.add('show');
+            musicPlayerVisible = false;
+        });
+
+        // Show Music Player
+        musicToggle.addEventListener('click', function() {
+            musicPlayer.classList.remove('hidden');
+            musicToggle.classList.remove('show');
+            musicPlayerVisible = true;
+        });
+
+        // Tạo particles với nhiều loại khác nhau
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Tạo các loại particle khác nhau
+                const rand = Math.random();
+                if (rand < 0.3) {
+                    particle.classList.add('star');
+                } else if (rand < 0.6) {
+                    particle.classList.add('heart');
+                }
+                
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (5 + Math.random() * 4) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Tạo floating hearts với hiệu ứng đẹp hơn
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartEmojis = ['💖', '💕', '💗', '💝', '💘', '💞'];
+            
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 4 + 's';
+                heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+                heart.style.fontSize = (1 + Math.random() * 0.8) + 'rem';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Xử lý play/pause đơn giản hơn (BỎ LOADING)
+        playBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.className = 'fas fa-play';
+                playBtn.classList.remove('playing');
+            } else {
+                audio.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                    playBtn.classList.add('playing');
+                }).catch(function(error) {
+                    console.error('Lỗi phát nhạc:', error);
+                    // Không hiển thị alert, chỉ log lỗi
+                });
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Xử lý volume với hiệu ứng
+        volumeSlider.addEventListener('input', function() {
+            audio.volume = this.value / 100;
+            
+            // Thay đổi icon volume
+            const volumeIcon = document.querySelector('.volume-control i');
+            if (this.value == 0) {
+                volumeIcon.className = 'fas fa-volume-mute';
+            } else if (this.value < 50) {
+                volumeIcon.className = 'fas fa-volume-down';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up';
+            }
+        });
+
+        // Xử lý khi nhạc kết thúc
+        audio.addEventListener('ended', function() {
+            playIcon.className = 'fas fa-play';
+            playBtn.classList.remove('playing');
+            isPlaying = false;
+        });
+
+        // Xử lý lỗi audio (không hiển thị alert)
+        audio.addEventListener('error', function(e) {
+            console.error('Lỗi audio:', e);
+            playIcon.className = 'fas fa-play';
+            playBtn.classList.remove('playing');
+            isPlaying = false;
+        });
+
+        // Xử lý khi audio sẵn sàng
+        audio.addEventListener('canplaythrough', function() {
+            console.log('Audio sẵn sàng phát');
+        });
+
+        // Thêm hiệu ứng click cho ảnh
+        document.querySelectorAll('.photo-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Khởi tạo hiệu ứng
+        // Tự động phát nhạc khi trang load
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createHearts();
+            
+            // Set volume mặc định
+            audio.volume = 0.5;
+            
+            // Preload audio
+            audio.load();
+            
+            // Tự động phát nhạc sau 1 giây
+            setTimeout(() => {
+                audio.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                    playBtn.classList.add('playing');
+                    isPlaying = true;
+                }).catch(function(error) {
+                    console.log('Autoplay bị chặn bởi trình duyệt:', error);
+                    // Nếu autoplay bị chặn, giữ nguyên nút play
+                });
+            }, 1000);
+        });
+
+        
+        // Thêm particles mới định kỳ
+        setInterval(() => {
+            if (document.querySelectorAll('.particle').length < 60) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const rand = Math.random();
+                if (rand < 0.3) {
+                    particle.classList.add('star');
+                } else if (rand < 0.6) {
+                    particle.classList.add('heart');
+                }
+                
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (5 + Math.random() * 4) + 's';
+                
+                document.getElementById('particles').appendChild(particle);
+                
+                // Xóa particle sau khi animation kết thúc
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 9000);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
