@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🚫 Đừng vào trang web này</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="all.min.css">
+    <link rel="stylesheet" href="css2.css">
     <style>
         * {
             margin: 0;
@@ -516,8 +519,10 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+     <script src="bootstrap.bundle.min.js"></script>
+    <script src="jquery-3.6.0.min.js"></script>
     <script>
         let clickCount = 0;
         let countdownInterval;
@@ -527,7 +532,7 @@
             "🚫 Hài hước chút thôi, nhưng mà... đừng bấm nha, tớ xin đó!",
             "😺 Meow meow, nút này không phải đồ chơi đâu, lùi lại nào!",
             "🌈 Trời ơi, bấm cái này là cả vũ trụ biết cậu nghịch ngợm đấy!",
-            "⏰ Đồng hồ đếm ngược đã bắt đầu! Cậu có 5 giây để suy nghĩ lại...",
+            "⏰ Đồng hồ đếm ngược đã bắt đầu! Cậu có 3 giây để suy nghĩ lại...",
         ];
 
         const buttonTexts = [
@@ -575,7 +580,7 @@
 
         // Hàm đếm ngược với hiệu ứng
         function startCountdown() {
-            let timeLeft = 5;
+            let timeLeft = 3;
             const countdownDisplay = $("#countdownDisplay");
             const dangerButton = $("#dangerButton");
             const warningBox = $("#warningBox");
